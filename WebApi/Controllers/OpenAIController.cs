@@ -1,14 +1,8 @@
 ﻿namespace WebApi.Controllers;
 
-// GPTAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// GPTAPI.Controllers.OpenAIController
-//using GPTAPI;
-//using GPTAPI.Controllers;
-//using GPTAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-//using Azure.AI;
 
 [Route("api/[controller]")]
 [ApiController]

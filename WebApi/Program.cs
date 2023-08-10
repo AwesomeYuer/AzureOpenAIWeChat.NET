@@ -14,10 +14,6 @@ builder.Services.Configure<Settings>(builder.Configuration.GetSection("OpenAI:Se
 
 var app = builder.Build();
 
-
-
-
-
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 {

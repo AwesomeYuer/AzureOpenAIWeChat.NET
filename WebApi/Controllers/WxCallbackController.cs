@@ -1,22 +1,13 @@
 ﻿namespace WebApi.Controllers;
 
-// GPTAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// GPTAPI.Controllers.CallbackController
-using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Web;
-using System.Xml;
-
+using Microshaoft;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using System;
+using System.IO;
+using System.Xml;
 using Tencent;
-using Microshaoft;
-//using WXLibrary;
 
 [Route("api/[controller]")]
 [ApiController]

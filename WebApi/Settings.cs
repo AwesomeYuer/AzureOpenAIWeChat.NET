@@ -1,6 +1,5 @@
 ﻿namespace WebApi
 {
-    // GPTAPI.Settings
     public class Settings
     {
         public string? WxToken { get; set; }

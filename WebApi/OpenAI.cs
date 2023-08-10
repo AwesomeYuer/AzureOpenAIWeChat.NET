@@ -1,7 +1,5 @@
 ﻿namespace WebApi
 {
-    // GPTAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-    // GPTAPI.Services.OpenAI
     using System;
     using System.Threading.Tasks;
     using Azure;
