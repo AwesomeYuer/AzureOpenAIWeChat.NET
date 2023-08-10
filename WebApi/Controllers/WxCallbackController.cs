@@ -1,0 +1,112 @@
+﻿namespace WebApi.Controllers;
+
+// GPTAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// GPTAPI.Controllers.CallbackController
+using System;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Web;
+using System.Xml;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+using Tencent;
+using Microshaoft;
+//using WXLibrary;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CallbackController : ControllerBase
+{
+    private readonly ILogger _logger;
+
+    public Settings _settings { get; }
+
+    private WXBizMsgCrypt _wxBizMsgCrypt;
+
+    public CallbackController(ILogger<CallbackController> logger, IOptionsSnapshot<Settings> options)
+    {
+        _settings = options.Value;
+        _logger = logger;
+
+        _wxBizMsgCrypt = new WXBizMsgCrypt(_settings.WxToken!, _settings.WxEncodingAESKey!, _settings.WxAppId!);
+    }
+
+    [HttpGet]
+    public string Get()
+    {
+        Console.WriteLine("Get====");
+        var query = HttpContext.Request.Query;
+        string echostr = query["echostr"];
+        return echostr;
+
+    }
+
+    [HttpPost]
+    public async Task<string> PostAsync()
+    {
+        var @return = string.Empty;
+        var query = HttpContext.Request.Query;
+        string msg_signature = string.Empty;
+        string nonce = string.Empty;
+        string timestamp = string.Empty;
+        string encrypt_type = string.Empty;
+        if (query is not null)
+        {
+            msg_signature = query["msg_signature"];
+            nonce = query["nonce"];
+            timestamp = query["timestamp"];
+            encrypt_type = query["encrypt_type"];
+            _ = query["signature"];
+            _ = query["echostr"];
+            if (!string.IsNullOrEmpty(encrypt_type))
+            {
+                if (!string.Equals(encrypt_type, "aes", StringComparison.OrdinalIgnoreCase))
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        using StreamReader reader = new StreamReader(HttpContext.Request.Body);
+        var data = await reader.ReadToEndAsync();
+        XmlDocument? xmlDocument = null;
+        string decryptedMsg = string.Empty;
+        if (!string.IsNullOrEmpty(encrypt_type))
+        {
+            xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(data);
+            var r = _wxBizMsgCrypt.DecryptMsg(xmlDocument, msg_signature, timestamp, nonce, ref decryptedMsg);
+            if (r != 0)
+            {
+                decryptedMsg = "wx error";
+            }
+        }
+
+        if (xmlDocument is not null)
+        {
+            if (!string.IsNullOrEmpty(decryptedMsg))
+            {
+                xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(decryptedMsg);
+                string message = xmlDocument.SelectSingleNode("xml/Content")?.ChildNodes[0]?.Value!;
+                message = await OpenAI.GetOpenAIResultAsync(message, _settings);
+
+                var wxXmlMessage = WeiXinXML.CreateTextMsg(xmlDocument, message);
+
+                timestamp = WeiXinXML.DateTime2Int(DateTime.Now).ToString();
+
+                var wxEncryptedMessage = WeiXinXML.CreateTextMsg(xmlDocument, message);
+
+                var r = _wxBizMsgCrypt.EncryptMsg(wxXmlMessage, timestamp,nonce, ref wxEncryptedMessage);
+
+                @return = wxEncryptedMessage;
+            }
+        }
+        return @return;
+    }
+}
