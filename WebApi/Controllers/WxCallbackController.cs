@@ -30,7 +30,7 @@ public class CallbackController : ControllerBase
     [HttpGet]
     public string Get()
     {
-        Console.WriteLine("Get====");
+        Console.WriteLine("===Get====");
         var query = HttpContext.Request.Query;
         string echostr = query["echostr"];
         return echostr;
