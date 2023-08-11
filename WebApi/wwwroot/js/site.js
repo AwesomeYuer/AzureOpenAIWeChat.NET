@@ -114,8 +114,8 @@ function submitForm(id) {
     var topic = $("#Topic").val();
 
     $.ajax({
-        //url: "https://eu-aoai-ins-001.openai.azure.com/api/OpenAI", 
-        url: "https://localhost:7103/api/OpenAI",
+        url: "https://eu-aoai-ins-001.openai.azure.com/api/OpenAI", 
+        //url: "https://localhost:7103/api/OpenAI",
         type: 'POST',
         contentType: "application/json;charset=utf-8",
         async: true,
