@@ -1,3 +1,5 @@
+# This is a too simple sample, it's not a complete sample.
+
 # 微信公众号(订阅号)开发
 
 https://mp.weixin.qq.com/
