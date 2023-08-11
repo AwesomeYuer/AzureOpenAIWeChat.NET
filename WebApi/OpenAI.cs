@@ -13,7 +13,7 @@
             {
                 OpenAIClient openAIClient = new OpenAIClient(new Uri(settings.AzureEndpoint!), new AzureKeyCredential(settings.AzureKeyCredential!));
 
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
 
                 Response<ChatCompletions> responseWithoutStream =
                         await openAIClient
@@ -38,9 +38,10 @@
                 _ = responseWithoutStream.Value;
                 return responseWithoutStream.Value.Choices[0].Message.Content;
             }
-            catch
+            catch (Exception e)
             {
-                return string.Empty;
+                Console.WriteLine(e);
+                return e.ToString();
             }
         }
     }

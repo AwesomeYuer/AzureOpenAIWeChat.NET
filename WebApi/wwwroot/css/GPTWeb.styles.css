@@ -1,0 +1,97 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-m6jvwzhgbx] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-m6jvwzhgbx] {
+  color: #0077cc;
+}
+
+.btn-primary[b-m6jvwzhgbx] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-m6jvwzhgbx], .nav-pills .show > .nav-link[b-m6jvwzhgbx] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-m6jvwzhgbx] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-m6jvwzhgbx] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-m6jvwzhgbx] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-m6jvwzhgbx] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-m6jvwzhgbx] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/ChatPPT.Web/Pages/Shared/_SimpleLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-gm4all1oj2] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-gm4all1oj2] {
+  color: #0077cc;
+}
+
+.btn-primary[b-gm4all1oj2] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-gm4all1oj2], .nav-pills .show > .nav-link[b-gm4all1oj2] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-gm4all1oj2] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-gm4all1oj2] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-gm4all1oj2] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-gm4all1oj2] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-gm4all1oj2] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

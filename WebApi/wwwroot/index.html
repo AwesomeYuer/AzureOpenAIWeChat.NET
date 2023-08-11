@@ -1,0 +1,71 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page - GPTWeb</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+</head>
+<body>
+            
+<div class="text-center">
+
+    <form method="post" id="form">
+        <input type="hidden" id="format" name="format">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <textarea class="form-control" maxlength="2000" rows="3" placeholder="Enter topic to get ideas, e.g. How about Microsoft?" data-val="true" data-val-required="The Topic field is required." id="Topic" name="Topic"></textarea>
+                <div id="the-count">
+                    <span id="current">0</span>
+                    <span id="maximum">/ 2000</span>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="collapseParameters" style="">
+            <div class="row" style="height:50px">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3 justify-content-end small">
+                    Temperature (Randomness):
+                </div>
+                <div class="col-sm-3">
+                    <input type="range" class="form-range form-control me-3 px-1 small" value="0.7" min="0" max="1" step="0.01" oninput="document.getElementById('temp').value = this.value" data-val="true" data-val-number="The field Temperature must be a number." data-val-required="The Temperature field is required." id="Temperature" name="Temperature">
+                </div>
+                <div class="col-sm-1">
+                    <output id="temp" class="small">0.7</output>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+
+        <br>
+        <button id="submit-btn" type="button" class="btn btn-primary" onclick="submitForm('1')">Submit</button>&nbsp;&nbsp;
+        <button id="cancel-btn" type="submit" name="Clear" value="Clear" class="btn btn-warning">&nbsp;Clear&nbsp;</button>&nbsp;&nbsp;
+
+
+        <button class="btn btn-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseParameters" aria-expanded="false" aria-controls="collapseParameters">
+            Settings
+        </button>
+    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8OCAUF3_wi5Fg_jswcPVaWISQ9rlloZ_n7VnxteJPKH7jAD74kuxSGohtsWJV5vweJgD_4fEb5zJX2eiOL84bA1R7nZF5XGFRMGRE5DGsRBo7feyxmXx36I7-o8WVc6VW97F7aT7g6jCirBviGn5_hs" /></form>
+    <br>
+    <a href="https://learn.microsoft.com/en-us/legal/cognitive-services/openai/code-of-conduct" target="_blank" class="small">Code of conduct for Azure OpenAI Service</a>
+</div>
+
+<br>
+<div class="row justify-content-center">
+    <br>
+    <br>
+    <div class="alert alert-info col-9" role="alert" id="result" style="display:none">
+    </div>
+</div>
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/js/knockout-latest.js"></script>
+    <script src="/js/site.js"></script>
+    
+</body>
+</html>

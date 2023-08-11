@@ -11,6 +11,28 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<Settings>(builder.Configuration.GetSection("OpenAI:Settings"));
 
+builder
+    .Services
+    .AddCors
+        (
+            (options) =>
+            {
+                options
+                    .AddDefaultPolicy
+                        (
+                            (corsPolicyBuilder) =>
+                            {
+                                corsPolicyBuilder
+                                        .SetIsOriginAllowed((x) => true)
+                                        .AllowCredentials()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader();
+                            }
+                        );
+            }
+        );
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +43,10 @@ var app = builder.Build();
 }
 
 app.UseHttpsRedirection();
+
+app
+    .UseDefaultFiles()
+    .UseStaticFiles();
 
 app.UseAuthorization();
 
