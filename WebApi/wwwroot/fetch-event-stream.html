@@ -17,7 +17,7 @@
         let abortController;
 
         function cancel() {
-            abortController.abort();
+            abortController.abort("abort fetch request");
         }
 
         const inputElement = document.getElementById("input");
@@ -25,14 +25,15 @@
         output.innerText = "";
 
         async function send() {
-            output.innerText = "";
+            try {
+                output.innerText = "";
 
-            // abortController should be assigned here
-            abortController = new AbortController();
-            const abortSignal = abortController.signal;
-            
-            const data = { "Prompt": inputElement.value };
-            const response = await fetch(url, {
+                // abortController should be assigned here
+                abortController = new AbortController();
+                const abortSignal = abortController.signal;
+
+                const data = { "Prompt": inputElement.value };
+                const response = await fetch(url, {
                     method: "POST",
                     body: JSON.stringify(data),
                     headers: {
@@ -42,20 +43,23 @@
                 }).catch((err) => {
                     console.error(`fetch error: ${err.message}`);
                 });
-            var encoder = new TextDecoder("utf-8");
-            var reader = response.body.getReader();
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) {
-                    break;
+                var encoder = new TextDecoder("utf-8");
+                var reader = response.body.getReader();
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        break;
+                    }
+                    const text = encoder.decode(value);
+                    if (text === "<ERR>") {
+                        output.innerText = "Error";
+                        break;
+                    } else {
+                        output.innerText += text;
+                    }
                 }
-                const text = encoder.decode(value);
-                if (text === "<ERR>") {
-                    output.innerText = "Error";
-                    break;
-                } else {
-                    output.innerText += text;
-                }
+            } catch (err) {
+                console.log(`fetch error: ${err.message}`);
             }
         }
     </script>
