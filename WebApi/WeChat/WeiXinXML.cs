@@ -1,9 +1,5 @@
 ﻿namespace Microshaoft
 {
-
-
-    // WXLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-    // WXLibrary.WeiXinXML
     using System;
     using System.Xml;
 
@@ -59,5 +55,4 @@
             return @return;
         }
     }
-
 }
