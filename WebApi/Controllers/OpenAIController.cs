@@ -32,27 +32,26 @@ public class OpenAIController : ControllerBase
 
     [HttpPost]
     [HttpGet]
-    [Route("sse")]
-    public async Task Post2()
+    [Route("fetch")]
+    public async Task FetchEventStream()
     {
-        HttpContext.Response.ContentType = "text/event-stream";
+        var response = HttpContext.Response;
+        response.ContentType = "text/event-stream";
         for (int i = 0; i < 10; i++)
         {
             string data = @$"id: {Guid.NewGuid()}
 retry: 1000
-event: message
+event: NEW_LOG
 data: 你好{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}
 
 
 ";
             data = $"data: 你好{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n";    
-            var bitys = Encoding.UTF8.GetBytes(data);
+            var bytes = Encoding.UTF8.GetBytes(data);
 
-            await HttpContext.Response.Body.WriteAsync(bitys);
-            await HttpContext.Response.Body.FlushAsync();
-            //Task.Delay(1000 * 2);
-            Thread.Sleep(1000 * 5);
+            await response.Body.WriteAsync(bytes);
+            await response.Body.FlushAsync();
+            await Task.Delay(1000 * 2);
         }
-        //return new EmptyResult();
     }
 }
