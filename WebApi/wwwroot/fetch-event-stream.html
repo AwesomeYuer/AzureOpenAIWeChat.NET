@@ -27,10 +27,10 @@
         async function send() {
             output.innerText = "";
 
+            // abortController should be assigned here
             abortController = new AbortController();
             const abortSignal = abortController.signal;
             
-            //const url = "/api/stream";
             const data = { "Prompt": inputElement.value };
             const response = await fetch(url, {
                     method: "POST",
@@ -42,14 +42,14 @@
                 }).catch((err) => {
                     console.error(`fetch error: ${err.message}`);
                 });
-            var encode = new TextDecoder("utf-8");
+            var encoder = new TextDecoder("utf-8");
             var reader = response.body.getReader();
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
                     break;
                 }
-                const text = encode.decode(value);
+                const text = encoder.decode(value);
                 if (text === "<ERR>") {
                     output.innerText = "Error";
                     break;
