@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
+using System.Text.Json.Nodes;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -33,7 +34,7 @@ public class OpenAIController : ControllerBase
     [HttpPost]
     [HttpGet]
     [Route("fetch")]
-    public async Task FetchEventStream()
+    public async Task FetchEventStream([FromBody] JsonNode? parameters)
     {
         var response = HttpContext.Response;
         response.ContentType = "text/event-stream";
@@ -46,7 +47,7 @@ data: 你好{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}
 
 
 ";
-            data = $"data: 你好{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n";    
+            data = $"data: {i},你好{parameters},{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n";    
             var bytes = Encoding.UTF8.GetBytes(data);
 
             await response.Body.WriteAsync(bytes);

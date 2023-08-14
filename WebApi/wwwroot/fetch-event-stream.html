@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Example Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #input {
+            width: 400px;
+            height: 30px;
+            margin-right: 10px;
+            align-self: center;
+        }
+
+        #output {
+            width: 400px;
+            height: 100px;
+            margin-top: 10px;
+            background-color: #f2f2f2;
+            color: #333;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow: auto;
+            align-self: center;
+        }
+
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <input type="text" id="input">
+        <button onclick="send()">Send</button>
+        <button onclick="cancel()">Cancel</button>
+    </div>
+    <div id="output"></div>
+    <script>
+        var url = "https://localhost:7103/api/OpenAI/fetch";
+
+        let abortController;
+
+        function cancel() {
+            abortController.abort();
+        }
+
+        const inputElement = document.getElementById("input");
+        const output = document.getElementById("output");
+        output.innerText = "";
+
+        async function send() {
+            output.innerText = "";
+            abortController = new AbortController();
+            const abortSignal = abortController.signal;
+            
+            //const url = "/api/stream";
+            const data = { "Prompt": inputElement.value };
+            const response = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    signal: abortSignal
+                }).catch((err) => {
+                    console.error(`fetch error: ${err.message}`);
+                });
+            var encode = new TextDecoder("utf-8");
+            var reader = response.body.getReader();
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                    break;
+                }
+                const text = encode.decode(value);
+                if (text === "<ERR>") {
+                    output.innerText = "Error";
+                    break;
+                } else {
+                    output.innerText += text;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

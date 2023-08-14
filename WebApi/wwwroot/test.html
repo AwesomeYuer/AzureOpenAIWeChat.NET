@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <button id="downloadBtn">Download</button>
+    <button id="abortBtn">abort</button>
+
+
+    <script>
+        let controller;
+        var url = "https://localhost:7103/api/OpenAI/fetch";
+
+        const downloadBtn = document.getElementById("downloadBtn");
+        const abortBtn = document.getElementById("abortBtn");
+
+        downloadBtn.addEventListener("click", fetchVideo);
+
+        abortBtn.addEventListener("click", () => {
+            if (controller) {
+                controller.abort();
+                console.log("Download aborted");
+            }
+        });
+
+        function fetchVideo() {
+            controller = new AbortController();
+            const signal = controller.signal;
+            fetch(url, { 
+                            headers: {
+                            "Content-Type": "application/json"
+                            },
+                            signal
+                })
+                .then((response) => {
+                    console.log("Download complete", response);
+                })
+                .catch((err) => {
+                    console.error(`Download error: ${err.message}`);
+                });
+        }
+
+
+
+    </script>
+
+
+
+</body>
+</html>
