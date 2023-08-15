@@ -13,7 +13,7 @@
             {
                 OpenAIClient openAIClient = new OpenAIClient(new Uri(settings.AzureEndpoint!), new AzureKeyCredential(settings.AzureKeyCredential!));
 
-                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
 
                 Response<ChatCompletions> responseWithoutStream =
                         await openAIClient
