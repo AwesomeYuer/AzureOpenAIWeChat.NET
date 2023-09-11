@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "wechat-open-ai-webapi",
+      "defaultValue": "SimpleWeChatWebApi",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

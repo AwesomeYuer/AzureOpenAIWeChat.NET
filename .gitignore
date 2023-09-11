@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /WebApi/appsettings.Development.json
 
+/OpenAIWebApiApp/appsettings.Development.json
+/WeChatWebApi/appsettings.Development.json

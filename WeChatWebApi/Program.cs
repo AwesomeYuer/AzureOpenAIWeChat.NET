@@ -1,5 +1,4 @@
-using WebApi;
-
+using AzureOpenAI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<Settings>(builder.Configuration.GetSection("OpenAI:Settings"));
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
 builder
     .Services
@@ -43,12 +42,6 @@ var app = builder.Build();
 }
 
 app.UseHttpsRedirection();
-
-app
-    .UseDefaultFiles()
-    .UseStaticFiles();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to Web App wechat-open-ai-webapi
+name: Build and deploy .NET Core application to Web App SimpleWeChatWebApi
 on:
   push:
     branches:
     - master
 env:
-  AZURE_WEBAPP_NAME: wechat-open-ai-webapi
+  AZURE_WEBAPP_NAME: SimpleWeChatWebApi
   AZURE_WEBAPP_PACKAGE_PATH: ./publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.wechat_open_ai_webapi_1A79 }}
+        publish-profile: ${{ secrets.SimpleWeChatWebApi_7081 }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

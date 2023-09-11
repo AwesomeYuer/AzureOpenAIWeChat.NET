@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="OpenAI.cs" />
+    <Compile Remove="Settings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
@@ -55,6 +60,10 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
     <None Include="wwwroot\test.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AzureOpenAIHelper\AzureOpenAIHelper.csproj" />
   </ItemGroup>
 
 </Project>
