@@ -1,14 +1,14 @@
 # This is a too simple sample, it's not a complete sample.
 
-# Î¢ĞÅ¹«ÖÚºÅ(¶©ÔÄºÅ)¿ª·¢
+# å¾®ä¿¡å…¬ä¼—å·(è®¢é˜…å·)å¼€å‘
 
 https://mp.weixin.qq.com/
 
-## ¸öÈË×¢²á¹«ÖÚÆ½Ì¨²½Öè
+## ä¸ªäººæ³¨å†Œå…¬ä¼—å¹³å°æ­¥éª¤
 
 https://kf.qq.com/faq/120911VrYVrA151009eIrYvy.html
 
-## ½« Azure AD Ó¦ÓÃÏŞÖÆÎª½ö¹© Azure AD ×â»§ÖĞµÄÒ»×éÓÃ»§Ê¹ÓÃ
+## å°† Azure AD åº”ç”¨é™åˆ¶ä¸ºä»…ä¾› Azure AD ç§Ÿæˆ·ä¸­çš„ä¸€ç»„ç”¨æˆ·ä½¿ç”¨
 
 Enterprise applications
 
@@ -23,3 +23,4 @@ https://learn.microsoft.com/zh-cn/azure/active-directory/develop/howto-restrict-
 https://learn.microsoft.com/en-us/azure/active-directory/develop/application-consent-experience
 
 https://learn.microsoft.com/zh-cn/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal
+
