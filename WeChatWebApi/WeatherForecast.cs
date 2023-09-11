@@ -1,4 +1,4 @@
-namespace WebApi
+namespace OpenAIWebApi
 {
     public class WeatherForecast
     {

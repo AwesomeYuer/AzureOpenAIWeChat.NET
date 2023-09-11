@@ -1,4 +1,4 @@
-﻿namespace WebApi
+﻿namespace AzureOpenAI.Utilities
 {
     public class Settings
     {
@@ -18,5 +18,4 @@
 
         public string? System { get; set; }
     }
-
 }

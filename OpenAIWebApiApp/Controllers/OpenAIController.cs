@@ -1,10 +1,12 @@
-﻿namespace WebApi.Controllers;
+﻿namespace OpenAIWebApi.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json.Nodes;
+using AzureOpenAI.Utilities;
+
 
 [Route("api/[controller]")]
 [ApiController]

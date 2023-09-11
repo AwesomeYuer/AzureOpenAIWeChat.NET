@@ -1,5 +1,5 @@
-using WebApi;
-
+using OpenAIWebApi;
+using AzureOpenAI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 

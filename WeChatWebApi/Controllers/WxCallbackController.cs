@@ -1,4 +1,4 @@
-﻿namespace WebApi.Controllers;
+﻿namespace OpenAIWebApi.Controllers;
 
 using Microshaoft;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +8,8 @@ using System;
 using System.IO;
 using System.Xml;
 using Tencent;
+using AzureOpenAI.Utilities;
+
 
 [Route("api/[controller]")]
 [ApiController]
