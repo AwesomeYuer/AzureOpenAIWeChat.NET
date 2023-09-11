@@ -118,7 +118,6 @@ function submitForm(id) {
         url = "https://localhost:7103/api/OpenAI";
     }
 
-
     $.ajax({
         url: url, 
         //url: "https://localhost:7103/api/OpenAI",
