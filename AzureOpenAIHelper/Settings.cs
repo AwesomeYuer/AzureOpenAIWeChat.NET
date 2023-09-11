@@ -8,7 +8,7 @@
 
         public string? WxEncodingAESKey { get; set; }
 
-        public string? Web { get; set; }
+        //public string? Web { get; set; }
 
         public string? AzureEndpoint { get; set; }
 

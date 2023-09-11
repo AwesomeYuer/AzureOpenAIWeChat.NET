@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<Settings>(builder.Configuration.GetSection("OpenAI:Settings"));
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
 builder
     .Services

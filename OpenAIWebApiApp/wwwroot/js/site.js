@@ -113,7 +113,7 @@ function submitForm(id) {
 
     var topic = $("#Topic").val();
 
-    var url = "https://wechat-open-ai-webapi.azurewebsites.net/api/OpenAI";
+    var url = "https://simpleazureopenaiwebapiapp.azurewebsites.net/api/OpenAI";
     if (window.location.hostname === 'localhost') {
         url = "https://localhost:7103/api/OpenAI";
     }
