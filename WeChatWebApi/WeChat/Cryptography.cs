@@ -9,17 +9,17 @@ namespace Tencent
 {
     class Cryptography
     {
-        public static UInt32 HostToNetworkOrder(UInt32 inval)
+        public static uint HostToNetworkOrder(uint inval)
         {
-            UInt32 outval = 0;
+            uint outval = 0;
             for (int i = 0; i < 4; i++)
                 outval = (outval << 8) + ((inval >> (i * 8)) & 255);
             return outval;
         }
 
-        public static Int32 HostToNetworkOrder(Int32 inval)
+        public static int HostToNetworkOrder(int inval)
         {
-            Int32 outval = 0;
+            int outval = 0;
             for (int i = 0; i < 4; i++)
                 outval = (outval << 8) + ((inval >> (i * 8)) & 255);
             return outval;
@@ -31,7 +31,7 @@ namespace Tencent
         /// <param name="EncodingAESKey"></param>
         /// <returns></returns>
         /// 
-        public static string AES_decrypt(String Input, string EncodingAESKey, ref string appid)
+        public static string AES_decrypt(string Input, string EncodingAESKey, ref string appid)
         {
             byte[] Key;
             Key = Convert.FromBase64String(EncodingAESKey + "=");
@@ -54,7 +54,7 @@ namespace Tencent
             return oriMsg;
         }
 
-        public static String AES_encrypt(String Input, string EncodingAESKey, string appid)
+        public static string AES_encrypt(string Input, string EncodingAESKey, string appid)
         {
             byte[] Key;
             Key = Convert.FromBase64String(EncodingAESKey + "=");
@@ -84,21 +84,20 @@ namespace Tencent
             }
             string[] arr = codeSerial.Split(',');
             string code = "";
-            int randValue = -1;
             Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
             for (int i = 0; i < codeLen; i++)
             {
-                randValue = rand.Next(0, arr.Length - 1);
+                int randValue = rand.Next(0, arr.Length - 1);
                 code += arr[randValue];
             }
             return code;
         }
 
-        private static String AES_encrypt(String Input, byte[] Iv, byte[] Key)
+        private static string AES_encrypt(string Input, byte[] Iv, byte[] Key)
         {
-            var aes = new RijndaelManaged();
+            var aes = Aes.Create("AesManaged");
             //秘钥的大小，以位为单位
-            aes.KeySize = 256;
+            aes!.KeySize = 256;
             //支持的块大小
             aes.BlockSize = 128;
             //填充模式
@@ -107,7 +106,7 @@ namespace Tencent
             aes.Key = Key;
             aes.IV = Iv;
             var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
-            byte[] xBuff = null;
+            byte[] xBuff = null!;
 
             using (var ms = new MemoryStream())
             {
@@ -118,15 +117,17 @@ namespace Tencent
                 }
                 xBuff = ms.ToArray();
             }
-            String Output = Convert.ToBase64String(xBuff);
+            string Output = Convert.ToBase64String(xBuff);
             return Output;
         }
 
-        private static String AES_encrypt(byte[] Input, byte[] Iv, byte[] Key)
+
+
+        private static string AES_encrypt(byte[] Input, byte[] Iv, byte[] Key)
         {
-            var aes = new RijndaelManaged();
+            var aes = Aes.Create("AesManaged");
             //秘钥的大小，以位为单位
-            aes.KeySize = 256;
+            aes!.KeySize = 256;
             //支持的块大小
             aes.BlockSize = 128;
             //填充模式
@@ -136,7 +137,7 @@ namespace Tencent
             aes.Key = Key;
             aes.IV = Iv;
             var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
-            byte[] xBuff = null;
+            byte[] xBuff = null!;
 
             #region 自己进行PKCS7补位，用系统自己带的不行
             byte[] msg = new byte[Input.Length + 32 - Input.Length % 32];
@@ -159,7 +160,7 @@ namespace Tencent
                 xBuff = ms.ToArray();
             }
 
-            String Output = Convert.ToBase64String(xBuff);
+            string Output = Convert.ToBase64String(xBuff);
             return Output;
         }
 
@@ -193,17 +194,17 @@ namespace Tencent
             byte target = (byte)(a & 0xFF);
             return (char)target;
         }
-        private static byte[] AES_decrypt(String Input, byte[] Iv, byte[] Key)
+        private static byte[] AES_decrypt(string Input, byte[] Iv, byte[] Key)
         {
-            RijndaelManaged aes = new RijndaelManaged();
-            aes.KeySize = 256;
+            var aes = Aes.Create("AesManaged");
+            aes!.KeySize = 256;
             aes.BlockSize = 128;
             aes.Mode = CipherMode.CBC;
             aes.Padding = PaddingMode.None;
             aes.Key = Key;
             aes.IV = Iv;
             var decrypt = aes.CreateDecryptor(aes.Key, aes.IV);
-            byte[] xBuff = null;
+            byte[] xBuff = null!;
             using (var ms = new MemoryStream())
             {
                 using (var cs = new CryptoStream(ms, decrypt, CryptoStreamMode.Write))

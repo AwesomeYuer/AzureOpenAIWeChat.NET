@@ -145,14 +145,14 @@ namespace Tencent
             return 0;
         }
 
-        public class DictionarySort : System.Collections.IComparer
+        public class DictionarySort : IComparer
         {
-            public int Compare(object oLeft, object oRight)
+            public int Compare(object? oLeft, object? oRight)
             {
-                string sLeft = oLeft as string;
-                string sRight = oRight as string;
-                int iLeftLength = sLeft.Length;
-                int iRightLength = sRight.Length;
+                string? sLeft = oLeft as string;
+                string? sRight = oRight as string;
+                int iLeftLength = sLeft!.Length;
+                int iRightLength = sRight!.Length;
                 int index = 0;
                 while (index < iLeftLength && index < iRightLength)
                 {
@@ -203,7 +203,7 @@ namespace Tencent
             string hash = "";
             try
             {
-                sha = new SHA1CryptoServiceProvider();
+                sha = SHA1.Create();
                 enc = new ASCIIEncoding();
                 byte[] dataToHash = enc.GetBytes(raw);
                 byte[] dataHashed = sha.ComputeHash(dataToHash);

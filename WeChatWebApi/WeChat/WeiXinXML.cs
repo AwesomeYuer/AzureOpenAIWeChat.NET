@@ -5,12 +5,9 @@
 
     public class WeiXinXML
     {
-        public static string CreateTextMsg(XmlDocument xmlDoc, string content)
+        public static string CreateTextMsg(string content, string originalFromUserName, string originalToUserName)
         {
-            var toUserName = GetFromXML(xmlDoc, "FromUserName");
-            var fromUserName = GetFromXML(xmlDoc, "ToUserName");
-
-            return string.Format("<xml>\r\n                <ToUserName><![CDATA[{0}]]></ToUserName>\r\n                <FromUserName><![CDATA[{1}]]></FromUserName>\r\n                <CreateTime>{2}</CreateTime>\r\n                <MsgType><![CDATA[text]]></MsgType>\r\n                <Content><![CDATA[{3}]]></Content>\r\n                </xml>", toUserName, fromUserName, DateTime2Int(DateTime.Now), content);
+            return string.Format("<xml>\r\n                <ToUserName><![CDATA[{0}]]></ToUserName>\r\n                <FromUserName><![CDATA[{1}]]></FromUserName>\r\n                <CreateTime>{2}</CreateTime>\r\n                <MsgType><![CDATA[text]]></MsgType>\r\n                <Content><![CDATA[{3}]]></Content>\r\n                </xml>", originalFromUserName, originalToUserName, DateTime2Int(DateTime.Now), content);
         }
 
         public static string CreatePicMsg(XmlDocument xmlDoc, string content)
@@ -40,17 +37,19 @@
 
         public static int DateTime2Int(DateTime dt)
         {
-            DateTime dateTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            DateTime dateTime = // = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.FindSystemTimeZoneById("China Standard Time"));
+
             return (int)(dt - dateTime).TotalSeconds;
         }
 
         public static string? GetFromXML(XmlDocument xmlDoc, string name)
         {
             var @return = string.Empty;
-            XmlNode xmlNode = xmlDoc.SelectSingleNode("xml/" + name);
+            XmlNode xmlNode = xmlDoc.SelectSingleNode("xml/" + name)!;
             if (xmlNode != null && xmlNode.ChildNodes.Count > 0)
             {
-                @return = xmlNode.ChildNodes[0].Value;
+                @return = xmlNode.ChildNodes[0]!.Value;
             }
             return @return;
         }

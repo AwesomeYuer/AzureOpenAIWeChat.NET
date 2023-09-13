@@ -67,11 +67,11 @@ namespace MsgCryptTest
              * */
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(sEncryptMsg);
-            XmlNode root = doc.FirstChild;
-            string sig = root["MsgSignature"].InnerText;
-            string enc = root["Encrypt"].InnerText;
-            string timestamp = root["TimeStamp"].InnerText;
-            string nonce = root["Nonce"].InnerText;
+            XmlNode root = doc.FirstChild!;
+            string sig = root["MsgSignature"]!.InnerText;
+            string enc = root["Encrypt"]!.InnerText;
+            string timestamp = root["TimeStamp"]!.InnerText;
+            string nonce = root["Nonce"]!.InnerText;
             string stmp = "";
             //ret = wxcpt.DecryptMsg(sig, timestamp, nonce, sEncryptMsg, ref stmp);
             System.Console.WriteLine("stemp");

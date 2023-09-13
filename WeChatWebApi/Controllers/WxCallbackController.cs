@@ -87,17 +87,21 @@ public class CallbackController : ControllerBase
                 xmlDocument = new XmlDocument();
                 xmlDocument.LoadXml(decryptedMsg);
                 string message = xmlDocument.SelectSingleNode("xml/Content")?.ChildNodes[0]?.Value!;
+
+                var originalWeChatFromUserId = WeiXinXML.GetFromXML(xmlDocument, "FromUserName");
+                var originalWeChatToUserId = WeiXinXML.GetFromXML(xmlDocument, "ToUserName");
+                var weChatMsgId = WeiXinXML.GetFromXML(xmlDocument, "MsgId");
+
                 message = await OpenAI.GetOpenAIResultAsync(message, _settings);
 
-                var wxXmlMessage = WeiXinXML.CreateTextMsg(xmlDocument, message);
+                var wxXmlMessage = WeiXinXML.CreateTextMsg(message, originalWeChatFromUserId!, originalWeChatToUserId!);
 
                 timestamp = WeiXinXML.DateTime2Int(DateTime.Now).ToString();
 
-                var wxEncryptedMessage = WeiXinXML.CreateTextMsg(xmlDocument, message);
+                @return = wxXmlMessage;
 
-                var r = _wxBizMsgCrypt.EncryptMsg(wxXmlMessage, timestamp,nonce, ref wxEncryptedMessage);
+                _wxBizMsgCrypt.EncryptMsg(wxXmlMessage, timestamp,nonce, ref @return);
 
-                @return = wxEncryptedMessage;
             }
         }
         return @return;

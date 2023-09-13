@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="OpenAI.cs" />
     <Compile Remove="Settings.cs" />
+    <Compile Remove="WeChat\Sample.cs" />
   </ItemGroup>
 
   <ItemGroup>
